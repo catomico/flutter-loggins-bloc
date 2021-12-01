@@ -1,9 +1,9 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  @overide
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
   Widget build(context) {
     return Container(
       child: Form(
@@ -39,9 +39,10 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget submitButton() {
-    return const ElevatedButton(
-      child: Text('Login'),
-      color: Colors.blue,
+    return ElevatedButton(
+      child: const Text('Login'),
+      // add static style, check docs for button state styles
+      style: ElevatedButton.styleFrom(primary: Colors.green),
       onPressed: () {},
     );
   }
