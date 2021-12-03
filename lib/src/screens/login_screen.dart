@@ -5,17 +5,20 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Container(
-      child: Form(
-        child: Column(
-          children: [
-            emailField(),
-            passwordField(),
-            submitButton(),
-          ],
-        ),
-      ),
-    );
+    return Center(
+        child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 400),
+                child: Form(
+                    child: Column(children: [
+                  Container(margin: const EdgeInsets.symmetric(vertical: 10.0)),
+                  emailField(),
+                  Container(margin: const EdgeInsets.symmetric(vertical: 10.0)),
+                  passwordField(),
+                  Container(margin: const EdgeInsets.symmetric(vertical: 30.0)),
+                  submitButton()
+                ])))));
   }
 
   Widget emailField() {
