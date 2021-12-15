@@ -33,5 +33,6 @@ class Bloc extends Object with Validators {
   // }
 }
 
-//make an instance of our Bloc class to use everywhere, if scoped version is needed then create an instance in the hierarchy where it is needed,
-final bloc = Bloc();
+//make a global instance of our Bloc class to use everywhere, if scoped version is needed then create an instance in the hierarchy where it is needed,
+// see provider.dart
+// final bloc = Bloc();

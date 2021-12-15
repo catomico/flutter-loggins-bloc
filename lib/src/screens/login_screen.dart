@@ -5,11 +5,23 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../bloc/bloc.dart';
 
+// because we changed from global to scoped instances of bloc, things like bloc.changeEmail won;t work, the provider gives us scoped instances
+import '../bloc/provider.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
+  // This static method from provider.dart
+  // static Bloc of(BuildContext context) {
+  //   return (context.dependOnInheritedWidgetOfExactType<Provider>() as Provider).bloc;
+  // }
+  //  we don't creat an instance of Provider class, rather an of
+  // inside the build method go up the hierarchy to find a provider
+
   @override
   Widget build(context) {
+    final bloc = Provider.of(context);
+
     return Center(
         child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -18,15 +30,15 @@ class LoginScreen extends StatelessWidget {
                 child: Form(
                     child: Column(children: [
                   Container(margin: const EdgeInsets.symmetric(vertical: 10.0)),
-                  emailField(),
+                  emailField(bloc),
                   Container(margin: const EdgeInsets.symmetric(vertical: 10.0)),
-                  passwordField(),
+                  passwordField(bloc),
                   Container(margin: const EdgeInsets.symmetric(vertical: 30.0)),
                   submitButton()
                 ])))));
   }
 
-  Widget emailField() {
+  Widget emailField(Bloc bloc) {
     return StreamBuilder<String>(
       stream: bloc.email,
       builder: (context, snapshot) {
@@ -43,7 +55,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget passwordField() {
+  Widget passwordField(Bloc bloc) {
     return StreamBuilder<String>(
       stream: bloc.password,
       builder: (context, snapshot) {

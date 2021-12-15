@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
+import 'bloc/provider.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -8,12 +9,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(appName),
+    return Provider(
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text(appName),
+          ),
+          body: LoginScreen(),
         ),
-        body: LoginScreen(),
       ),
     );
   }
