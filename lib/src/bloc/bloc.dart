@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'validators.dart';
+import 'package:rxdart/rxdart.dart';
 
 //class car extends vehicle with Drivable, Parkable {}
 // This subclass car extends the base class with some mixins
@@ -18,9 +19,12 @@ class Bloc extends Object with Validators {
   // define a getter, which is a shortcut for deep drilling into
   // bloc.emailController.sink.add
 
+  // these are getters
   // retireve data from the stream
   Stream<String> get email => _email.stream.transform(validateEmail);
   Stream<String> get password => _password.stream.transform(validatePassword);
+  Stream<bool> get submitValid =>
+      Observable.combineLatest2(email, password, (e, p) => true);
 
   // add/change data, from the sink, to the stream
   Function(String) get changeEmail => _email.sink.add;
