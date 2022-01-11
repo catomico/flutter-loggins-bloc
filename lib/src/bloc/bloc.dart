@@ -12,8 +12,8 @@ import 'package:rxdart/rxdart.dart';
 class Bloc extends Object with Validators {
 // two stream controllers, password and pasword
 // marc the field as privat so that it is hidden from other files in the project
-  final _email = StreamController<String>();
-  final _password = StreamController<String>();
+  final _email = StreamController<String>.broadcast();
+  final _password = StreamController<String>.broadcast();
   // onInput -> map. this converts the html event input into a string. so define the input value as type <String>
 
   // define a getter, which is a shortcut for deep drilling into
@@ -24,7 +24,7 @@ class Bloc extends Object with Validators {
   Stream<String> get email => _email.stream.transform(validateEmail);
   Stream<String> get password => _password.stream.transform(validatePassword);
   Stream<bool> get submitValid =>
-      Observable.combineLatest2(email, password, (e, p) => true);
+      Rx.combineLatest2(email, password, (e, p) => true);
 
   // add/change data, from the sink, to the stream
   Function(String) get changeEmail => _email.sink.add;

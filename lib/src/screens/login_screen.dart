@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                   Container(margin: const EdgeInsets.symmetric(vertical: 10.0)),
                   passwordField(bloc),
                   Container(margin: const EdgeInsets.symmetric(vertical: 30.0)),
-                  submitButton()
+                  submitButton(bloc)
                 ])))));
   }
 
@@ -72,12 +72,20 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget submitButton() {
-    return ElevatedButton(
-      child: const Text('Login'),
-      // add static style, check docs for button state styles
-      style: ElevatedButton.styleFrom(primary: Colors.green),
-      onPressed: () {},
-    );
+  Widget submitButton(Bloc bloc) {
+    return StreamBuilder(
+        stream: bloc.submitValid,
+        builder: (context, snapshot) {
+          return ElevatedButton(
+            child: const Text('Login'),
+            // add static style, check docs for button state styles
+            style: ElevatedButton.styleFrom(primary: Colors.green),
+            onPressed: snapshot.hasError
+                ? null
+                : () {
+                    print("hllo there");
+                  },
+          );
+        });
   }
 }
