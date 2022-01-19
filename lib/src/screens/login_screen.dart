@@ -80,11 +80,11 @@ class LoginScreen extends StatelessWidget {
             child: const Text('Login'),
             // add static style, check docs for button state styles
             style: ElevatedButton.styleFrom(primary: Colors.green),
-            onPressed: snapshot.hasError
-                ? null
-                : () {
+            onPressed: snapshot.hasData
+                ? () {
                     print("hllo there");
-                  },
+                  }
+                : null,
           );
         });
   }
